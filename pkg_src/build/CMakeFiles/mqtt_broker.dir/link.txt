@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -O2 CMakeFiles/mqtt_broker.dir/src/main.c.o -o bin/mqtt_broker  lib/libmqtt_broker_lib.a -lm 

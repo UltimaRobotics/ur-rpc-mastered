@@ -1,0 +1,11 @@
+{
+    "broker": {
+        "port": 1885,
+        "max_connections": 100,
+        "max_message_size": 65536,
+        "persistence_dir": "persistence",
+        "log_level": "debug",
+        "auth_file": "config/auth.json",
+        "disconnect_handler_config": "config/disconnect_handler.json"
+    }
+}

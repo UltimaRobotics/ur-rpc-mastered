@@ -1,0 +1,20 @@
+{
+    "handlers": [
+        {
+            "client_id": "sensor1",
+            "action": "publish",
+            "topic": "status/sensor1",
+            "message": "offline"
+        },
+        {
+            "client_id": "sensor2",
+            "action": "publish",
+            "topic": "status/sensor2",
+            "message": "offline"
+        },
+        {
+            "action": "log",
+            "message": "Client disconnected from broker"
+        }
+    ]
+}

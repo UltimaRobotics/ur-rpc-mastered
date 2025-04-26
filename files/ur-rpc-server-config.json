@@ -1,0 +1,8 @@
+{
+    "port": 5555,
+    "handlers": {
+        "LOG": "handle_log",
+        "STATS": "handle_stats",
+        "BROADCAST": "handle_broadcast"
+    }
+}
