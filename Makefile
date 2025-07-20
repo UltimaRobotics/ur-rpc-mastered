@@ -1,24 +1,21 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=ur-rpc-mann
+PKG_NAME:=ur-rpc-super
 PKG_VERSION:=1.0.0
 PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/ur-updater-mann
+define Package/ur-rpc-super
   SECTION:=net
   CATEGORY:=Network
-  TITLE:=ur-rpc-core
-  DEPENDS:=+libcurl
+  TITLE:= $(PKG_NAME)
+  DEPENDS:=
   MAINTAINER:=Fehmi Yousfi <fehmi_yousfi@hotmail.com>
 endef
 
-define Package/ur-updater-mann/description
-	Advanced rpc layer based on mqtt broker Designed by Ultima Robotics for system processes linker
-	Provides a simple way to update the system and manage the processes
-	Supports multiple architectures and platforms
-
+define Package/ur-rpc-super/description
+	mosquitto rebuild for cross platform usage with TLS/SSL encryption validation (Super Broker)	
 endef
 
 define Build/Configure
@@ -40,20 +37,28 @@ endef
 
 define Build/Compile
 	echo "Building $(PKG_NAME) $(PKG_VERSION) in $(PKG_BUILD_DIR)"
-	$(MAKE) -C $(PKG_BUILD_DIR)/pkg_src CC=$(TARGET_CC) 
-	cp $(PKG_BUILD_DIR)/pkg_src/build/github_updater $(PKG_BUILD_DIR)/$(PKG_NAME)
+	$(MAKE) -C $(PKG_BUILD_DIR)/pkg_src CC=$(TARGET_CC) CXX=$(TARGET_CXX)
+	cp $(PKG_BUILD_DIR)/pkg_src/build/mqtt_broker $(PKG_BUILD_DIR)/$(PKG_NAME)
 endef
 
-define Package/ur-updater-mann/install
+define Package/ur-rpc-super/install
 	$(INSTALL_DIR) $(1)/bin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/$(PKG_NAME)
+	
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/ur-updater-mann.init $(1)/etc/init.d/ur-updater-mann
+	$(INSTALL_BIN) ./files/ur-rpc-super.init $(1)/etc/init.d/ur-rpc-super
+	$(INSTALL_DIR) $(1)/etc/config
+	$(INSTALL_BIN) ./files/ur-rpc-super $(1)/etc/config/ur-rpc-super
 
-	$(INSTALL_DIR) $(1)/log/ultima-process
-	$(INSTALL_CONF) $(PKG_BUILD_DIR)/pkg_src/github_updater.log $(1)/log/ultima-process/ultima_robotics_updater.log
-	$(INSTALL_DIR) $(1)/etc/updater-config
-	$(INSTALL_CONF) $(PKG_BUILD_DIR)/pkg_src/github_updater_config.json $(1)/etc/updater-config/ultima_robotics_updater_config.json
+	$(INSTALL_DIR) $(1)/etc/ultima-stack
+	$(INSTALL_CONF) ./files/default-configs/broker_super_ssl.json $(1)/etc/ultima-stack/broker_super_ssl.json
+	$(INSTALL_CONF) ./files/default-configs/broker_super_normal.json $(1)/etc/ultima-stack/broker_super_normal.json
+	$(INSTALL_DIR) $(1)/etc/ultima-stack/certs
+	$(INSTALL_CONF) ./files/certs/ca.crt $(1)/etc/ultima-stack/certs/ca.crt
+	$(INSTALL_CONF) ./files/certs/ca.key $(1)/etc/ultima-stack/certs/ca.key
+	$(INSTALL_CONF) ./files/certs/ca.srl $(1)/etc/ultima-stack/certs/ca.srl
+	$(INSTALL_CONF) ./files/certs/server.crt $(1)/etc/ultima-stack/certs/server.crt
+	$(INSTALL_CONF) ./files/certs/server.key $(1)/etc/ultima-stack/certs/server.key
 
 endef
 
@@ -61,5 +66,4 @@ define Build/clean
 	rm -rf $(PKG_BUILD_DIR)
 endef
 
-$(eval $(call BuildPackage,ur-updater-mann))
-#	$(MAKE) -C $(PKG_BUILD_DIR) CMAKE_C_COMPILER=$(TARGET_CC) CMAKE_CXX_COMPILER=$(TARGET_CXX)
+$(eval $(call BuildPackage,ur-rpc-super))

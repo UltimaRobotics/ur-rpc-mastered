@@ -1,4 +1,0 @@
-/home/fyou/Documents/ported/openwrt/package/ur-rpc-mastered/pkg_src/build/CMakeFiles/mqtt_broker_lib.dir
-/home/fyou/Documents/ported/openwrt/package/ur-rpc-mastered/pkg_src/build/CMakeFiles/mqtt_broker.dir
-/home/fyou/Documents/ported/openwrt/package/ur-rpc-mastered/pkg_src/build/CMakeFiles/edit_cache.dir
-/home/fyou/Documents/ported/openwrt/package/ur-rpc-mastered/pkg_src/build/CMakeFiles/rebuild_cache.dir

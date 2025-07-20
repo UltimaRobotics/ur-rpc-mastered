@@ -1,0 +1,26 @@
+{
+  "network": {
+    "bind_address": "0.0.0.0",
+    "port": 1889,
+    "ssl_port": 1889,
+    "max_clients": 100,
+    "max_message_size": 16384,
+    "keep_alive_interval": 60
+  },
+  "ssl": {
+    "enabled": true,
+    "ca_cert_file": "certs/ca.crt",
+    "server_cert_file": "certs/server.crt",
+    "server_key_file": "certs/server.key",
+    "require_client_cert": false
+  },
+  "broker": {
+    "max_inflight_messages": 50,
+    "max_queued_messages": 100,
+    "retain_available": true,
+    "wildcard_subscriptions": true
+  },
+  "authentication": {
+    "allow_anonymous": true
+  }
+}

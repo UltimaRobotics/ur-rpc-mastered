@@ -1,102 +1,181 @@
-/**
- * @file utils.h
- * @brief Utility functions for MQTT broker
- */
-
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <stddef.h>
+#include <stdint.h>
+#include <stdarg.h>
+#include <time.h>
+
+// Log levels
+#define LOG_LEVEL_ERROR 0
+#define LOG_LEVEL_WARN  1
+#define LOG_LEVEL_INFO  2
+#define LOG_LEVEL_DEBUG 3
+
+// Global log level
+extern int g_log_level;
+extern int g_log_to_console;
 
 /**
- * Generate a random client ID
- * @param buffer The buffer to store the client ID
- * @param size The size of the buffer
- * @return The buffer pointer on success, NULL on error
+ * Initialize logging system
+ * @param log_file Path to log file (NULL for console only)
+ * @param log_level Log level (0-3)
+ * @param log_to_console Whether to log to console
+ * @return 0 on success, -1 on error
  */
-char *utils_generate_client_id(char *buffer, size_t size);
+int log_init(const char *log_file, int log_level, int log_to_console);
 
 /**
- * Check if a topic matches a subscription pattern
- * @param topic The topic to check
- * @param subscription The subscription pattern to check against
- * @return 1 if the topic matches, 0 if not
+ * Cleanup logging system
  */
-int utils_topic_matches_subscription(const char *topic, const char *subscription);
+void log_cleanup(void);
 
 /**
- * Duplicate a string (like strdup, but with error handling)
- * @param str The string to duplicate
- * @return A pointer to the duplicated string, or NULL on error
+ * Log message
+ * @param level Log level
+ * @param file Source file name
+ * @param line Line number
+ * @param func Function name
+ * @param format Format string
+ * @param ... Format arguments
  */
-char *utils_strdup(const char *str);
+void log_message(int level, const char *file, int line, const char *func, const char *format, ...);
+
+// Logging macros
+#define LOG_ERROR(format, ...) log_message(LOG_LEVEL_ERROR, __FILE__, __LINE__, __func__, format, ##__VA_ARGS__)
+#define LOG_WARNING(format, ...) log_message(LOG_LEVEL_WARN, __FILE__, __LINE__, __func__, format, ##__VA_ARGS__)
+#define LOG_INFO(format, ...) log_message(LOG_LEVEL_INFO, __FILE__, __LINE__, __func__, format, ##__VA_ARGS__)
+#define LOG_DEBUG(format, ...) log_message(LOG_LEVEL_DEBUG, __FILE__, __LINE__, __func__, format, ##__VA_ARGS__)
 
 /**
- * Duplicate a memory block
- * @param ptr The memory block to duplicate
- * @param size The size of the memory block
- * @return A pointer to the duplicated memory block, or NULL on error
+ * Get current timestamp as string
+ * @param buffer Buffer to store timestamp
+ * @param buffer_size Buffer size
+ * @return Pointer to buffer
  */
-void *utils_memdup(const void *ptr, size_t size);
+char* get_timestamp(char *buffer, size_t buffer_size);
 
 /**
- * Convert a string to lowercase
- * @param str The string to convert
- * @return The string pointer
+ * Get memory usage in bytes
+ * @return Memory usage in bytes, -1 on error
  */
-char *utils_strlower(char *str);
+long get_memory_usage(void);
 
 /**
- * Convert a string to uppercase
- * @param str The string to convert
- * @return The string pointer
+ * Get system uptime in seconds
+ * @return Uptime in seconds, -1 on error
  */
-char *utils_strupper(char *str);
+long get_system_uptime(void);
 
 /**
- * Trim whitespace from the beginning and end of a string
- * @param str The string to trim
- * @return The string pointer
+ * Convert bytes to human readable format
+ * @param bytes Number of bytes
+ * @param buffer Buffer to store result
+ * @param buffer_size Buffer size
+ * @return Pointer to buffer
  */
-char *utils_strtrim(char *str);
+char* format_bytes(uint64_t bytes, char *buffer, size_t buffer_size);
 
 /**
- * Split a string into tokens
- * @param str The string to split
- * @param delim The delimiter character
- * @param tokens The array to store the tokens
- * @param max_tokens The maximum number of tokens to store
- * @return The number of tokens found
+ * Safe string copy with null termination
+ * @param dst Destination buffer
+ * @param src Source string
+ * @param dst_size Destination buffer size
+ * @return Number of characters copied
  */
-int utils_strsplit(const char *str, char delim, char **tokens, int max_tokens);
+size_t safe_strncpy(char *dst, const char *src, size_t dst_size);
 
 /**
- * Join tokens into a string
- * @param tokens The array of tokens
- * @param token_count The number of tokens
- * @param delim The delimiter character
- * @param result The buffer to store the result
- * @param result_size The size of the result buffer
- * @return The result buffer pointer on success, NULL on error
+ * Safe string concatenation with null termination
+ * @param dst Destination buffer
+ * @param src Source string
+ * @param dst_size Destination buffer size
+ * @return Number of characters in resulting string
  */
-char *utils_strjoin(char **tokens, int token_count, char delim, char *result, size_t result_size);
+size_t safe_strncat(char *dst, const char *src, size_t dst_size);
 
 /**
- * URL encode a string
- * @param str The string to encode
- * @param result The buffer to store the result
- * @param result_size The size of the result buffer
- * @return The result buffer pointer on success, NULL on error
+ * Hex dump for debugging
+ * @param data Data buffer
+ * @param length Data length
+ * @param prefix Prefix for each line
  */
-char *utils_url_encode(const char *str, char *result, size_t result_size);
+void hex_dump(const void *data, size_t length, const char *prefix);
 
 /**
- * URL decode a string
- * @param str The string to decode
- * @param result The buffer to store the result
- * @param result_size The size of the result buffer
- * @return The result buffer pointer on success, NULL on error
+ * Calculate hash for string (simple hash function)
+ * @param str Input string
+ * @return Hash value
  */
-char *utils_url_decode(const char *str, char *result, size_t result_size);
+uint32_t string_hash(const char *str);
+
+/**
+ * Check if string is numeric
+ * @param str Input string
+ * @return 1 if numeric, 0 otherwise
+ */
+int is_numeric(const char *str);
+
+/**
+ * Trim whitespace from string
+ * @param str Input string (modified in place)
+ * @return Pointer to trimmed string
+ */
+char* trim_whitespace(char *str);
+
+/**
+ * Parse boolean value from string
+ * @param str Input string ("true", "false", "1", "0", "yes", "no")
+ * @return 1 for true, 0 for false, -1 for invalid
+ */
+int parse_boolean(const char *str);
+
+/**
+ * Get random bytes
+ * @param buffer Buffer to store random bytes
+ * @param length Number of bytes to generate
+ * @return 0 on success, -1 on error
+ */
+int get_random_bytes(uint8_t *buffer, size_t length);
+
+/**
+ * Calculate CRC32 checksum
+ * @param data Data buffer
+ * @param length Data length
+ * @return CRC32 checksum
+ */
+uint32_t crc32(const uint8_t *data, size_t length);
+
+/**
+ * Sleep for specified milliseconds
+ * @param milliseconds Sleep duration
+ */
+void sleep_ms(uint32_t milliseconds);
+
+/**
+ * Get monotonic time in milliseconds
+ * @return Time in milliseconds since some unspecified starting point
+ */
+uint64_t get_monotonic_time_ms(void);
+
+/**
+ * Check if file exists
+ * @param filepath Path to file
+ * @return 1 if exists, 0 otherwise
+ */
+int file_exists(const char *filepath);
+
+/**
+ * Create directory recursively
+ * @param path Directory path
+ * @return 0 on success, -1 on error
+ */
+int create_directory(const char *path);
+
+/**
+ * Get file size
+ * @param filepath Path to file
+ * @return File size in bytes, -1 on error
+ */
+long get_file_size(const char *filepath);
 
 #endif /* UTILS_H */

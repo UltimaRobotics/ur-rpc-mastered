@@ -1,11 +1,12 @@
 # Default build directory
 BUILD_DIR = build
+
 CC ?= gcc
 CXX ?= g++
 
 # Default target
 all: $(BUILD_DIR)
-	cd $(BUILD_DIR) && cmake CMAKE_C_COMPILER=$(CC) .. && make
+	cd $(BUILD_DIR) && cmake -DCMAKE_C_COMPILER=$(CC) -DCMAKE_CXX_COMPILER=$(CXX) .. && make
 
 # Create build directory
 $(BUILD_DIR):
@@ -20,4 +21,4 @@ install: all
 	cd $(BUILD_DIR) && make install
 
 # Phony targets
-.PHONY: all clean install
+.PHONY: all clean install 
