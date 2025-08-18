@@ -1,0 +1,154 @@
+
+{
+  "network": {
+    "bind_address": "0.0.0.0",
+    "port": 1883,
+    "ssl_port": 8883,
+    "max_clients": 500,
+    "max_message_size": 32768,
+    "keep_alive_interval": 60,
+    "socket_timeout": 30,
+    "select_timeout": 1,
+    "backlog": 128
+  },
+  "ssl": {
+    "enabled": true,
+    "ca_cert_file": "certs/ca.crt",
+    "server_cert_file": "certs/server.crt",
+    "server_key_file": "certs/server.key",
+    "require_client_cert": false,
+    "verify_peer": false,
+    "cipher_suites": "ECDHE+AESGCM:ECDHE+CHACHA20:DHE+AESGCM:DHE+CHACHA20:!aNULL:!MD5:!DSS",
+    "protocols": ["TLSv1.2", "TLSv1.3"],
+    "cert_reqs": "CERT_NONE",
+    "tls_version": "auto"
+  },
+  "broker": {
+    "max_inflight_messages": 100,
+    "max_queued_messages": 500,
+    "retain_available": true,
+    "wildcard_subscriptions": true,
+    "subscription_identifiers": true,
+    "shared_subscriptions": true,
+    "maximum_qos": 2,
+    "message_expiry_interval": 7200,
+    "session_expiry_interval": 14400,
+    "receive_maximum": 50,
+    "maximum_packet_size": 268435455,
+    "topic_alias_maximum": 32,
+    "persistence_enabled": true,
+    "persistence_file": "/var/lib/mqtt_broker/persistence.db",
+    "autosave_interval": 300,
+    "max_retained_messages": 10000,
+    "retained_message_expiry": 86400
+  },
+  "authentication": {
+    "allow_anonymous": false,
+    "require_username": true,
+    "methods": ["password", "certificate"],
+    "password_file": "/etc/mqtt_broker/passwd",
+    "acl_file": "/etc/mqtt_broker/acl",
+    "certificate": {
+      "ca_file": "certs/ca.crt",
+      "require_cn_match": false,
+      "allowed_certificate_types": ["client", "server"]
+    }
+  },
+  "notification": {
+    "enabled": true,
+    "destination_client_id": "enhanced_notification_receiver",
+    "topic": "system/notifications",
+    "include_client_details": true,
+    "include_ssl_info": true,
+    "include_timestamp": true,
+    "max_subscribers": 500,
+    "notification_qos": 2,
+    "events": {
+      "client_connected": true,
+      "client_disconnected": true,
+      "topic_subscribed": true,
+      "topic_published": true,
+      "topic_unsubscribed": true,
+      "broker_started": true,
+      "broker_stopping": true,
+      "ssl_handshake_completed": true,
+      "ssl_handshake_failed": true,
+      "authentication_success": true,
+      "authentication_failure": true,
+      "certificate_generated": true,
+      "certificate_revoked": true
+    },
+    "rate_limit": {
+      "enabled": true,
+      "max_notifications_per_second": 500,
+      "burst_size": 1000
+    }
+  },
+  "certificate_generation": {
+    "enabled": true,
+    "ca_cert_file": "certs/ca.crt",
+    "ca_key_file": "certs/ca.key",
+    "output_directory": "certs/generated",
+    "default_validity_days": 365,
+    "max_validity_days": 3650,
+    "minimum_key_size": 2048,
+    "allowed_key_sizes": [2048, 3072, 4096],
+    "default_digest": "SHA256",
+    "file_permissions": {
+      "certificate": "644",
+      "private_key": "600",
+      "directory": "755"
+    },
+    "naming_convention": {
+      "certificate_prefix": "cert_",
+      "key_prefix": "key_",
+      "use_client_id": true,
+      "use_timestamp": false
+    },
+    "rate_limiting": {
+      "max_certificates_per_hour": 100,
+      "max_certificates_per_client": 10
+    }
+  },
+  "logging": {
+    "log_level": 4,
+    "log_to_console": true,
+    "log_to_file": true,
+    "log_file": "/var/log/mqtt_broker/enhanced_broker.log",
+    "log_rotation": {
+      "enabled": true,
+      "max_size": "10MB",
+      "max_files": 5,
+      "rotate_daily": false
+    },
+    "log_format": {
+      "timestamp": true,
+      "level": true,
+      "source_file": false,
+      "line_number": false,
+      "thread_id": false
+    },
+    "categories": {
+      "network": 4,
+      "mqtt_protocol": 4,
+      "authentication": 5,
+      "certificates": 4,
+      "notifications": 4,
+      "ssl": 4
+    }
+  },
+  "performance": {
+    "thread_pool_size": 4,
+    "connection_pool_size": 100,
+    "message_buffer_size": 8192,
+    "enable_keepalive": true,
+    "tcp_nodelay": true
+  },
+  "monitoring": {
+    "enabled": true,
+    "stats_interval": 60,
+    "health_check_port": 8080,
+    "metrics_topic": "system/metrics"
+  }
+}
+

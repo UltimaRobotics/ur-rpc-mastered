@@ -1,0 +1,23 @@
+{
+	"broker":	{
+		"host":	"127.0.0.1",
+		"port":	1855,
+		"ssl":	true
+	},
+	"certificates":	{
+		"ca_cert":	"certs/ca.crt",
+		"client_cert":	"certs/generic_runner_9383_1753641834_1753641834.crt",
+		"client_key":	"certs/generic_runner_9383_1753641834_1753641834.key",
+		"output_directory":	"/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/certs/broker/generated"
+	},
+	"defaults":	{
+		"client_id":	"cpp_config_client",
+		"organization":	"ConfigTestOrg",
+		"common_name":	"mqtt-config-client",
+		"validity_days":	730
+	},
+	"options":	{
+		"verbose":	true,
+		"enable_testing":	false
+	}
+}

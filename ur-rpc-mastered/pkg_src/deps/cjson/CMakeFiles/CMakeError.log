@@ -1,0 +1,51 @@
+Performing C SOURCE FILE Test FLAG_SUPPORTED_Wcomma failed with the following output:
+Change Dir: /home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_613fd/fast && gmake[4]: Entering directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_613fd.dir/build.make CMakeFiles/cmTC_613fd.dir/build
+gmake[5]: Entering directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_613fd.dir/src.c.o
+/usr/bin/cc -DFLAG_SUPPORTED_Wcomma  -fPIC -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong    -Wcomma -o CMakeFiles/cmTC_613fd.dir/src.c.o -c /home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command-line option '-Wcomma'; did you mean '-Wcomment'?
+gmake[5]: *** [CMakeFiles/cmTC_613fd.dir/build.make:78: CMakeFiles/cmTC_613fd.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:127: cmTC_613fd/fast] Error 2
+gmake[4]: Leaving directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test FLAG_SUPPORTED_Wmissingvariabledeclarations failed with the following output:
+Change Dir: /home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1f114/fast && gmake[4]: Entering directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_1f114.dir/build.make CMakeFiles/cmTC_1f114.dir/build
+gmake[5]: Entering directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1f114.dir/src.c.o
+/usr/bin/cc -DFLAG_SUPPORTED_Wmissingvariabledeclarations  -fPIC -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wmissing-variable-declarations -o CMakeFiles/cmTC_1f114.dir/src.c.o -c /home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command-line option '-Wmissing-variable-declarations'; did you mean '-Wmissing-declarations'?
+gmake[5]: *** [CMakeFiles/cmTC_1f114.dir/build.make:78: CMakeFiles/cmTC_1f114.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:127: cmTC_1f114/fast] Error 2
+gmake[4]: Leaving directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test FLAG_SUPPORTED_Wusedbutmarkedunused failed with the following output:
+Change Dir: /home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_e6728/fast && gmake[4]: Entering directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_e6728.dir/build.make CMakeFiles/cmTC_e6728.dir/build
+gmake[5]: Entering directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e6728.dir/src.c.o
+/usr/bin/cc -DFLAG_SUPPORTED_Wusedbutmarkedunused  -fPIC -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wused-but-marked-unused -o CMakeFiles/cmTC_e6728.dir/src.c.o -c /home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command-line option '-Wused-but-marked-unused'
+gmake[5]: *** [CMakeFiles/cmTC_e6728.dir/build.make:78: CMakeFiles/cmTC_e6728.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:127: cmTC_e6728/fast] Error 2
+gmake[4]: Leaving directory '/home/fyou/Documents/ur-rpc-enhanced/ur-rpc-mastered/pkg_src/deps/cjson/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }

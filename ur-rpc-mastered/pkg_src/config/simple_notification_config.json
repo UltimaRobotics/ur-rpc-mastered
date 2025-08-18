@@ -1,0 +1,25 @@
+{
+  "network": {
+    "bind_address": "0.0.0.0",
+    "port": 1899,
+    "max_clients": 100,
+    "max_message_size": 16384,
+    "keep_alive_interval": 60,
+    "socket_timeout": 30,
+    "select_timeout": 100
+  },
+  "ssl": {
+    "enabled": false
+  },
+  "notification": {
+    "enabled": true,
+    "destination_client_id": "notification_client",
+    "default_notification_topic": "broker-notifications",
+    "include_client_details": true,
+    "include_ssl_info": true,
+    "include_timestamp": true,
+    "max_subscribers": 100,
+    "notification_qos": 1
+  }
+}
+

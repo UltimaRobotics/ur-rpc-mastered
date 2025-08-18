@@ -1,0 +1,61 @@
+
+{
+  "network": {
+    "bind_address": "0.0.0.0",
+    "port": 1899,
+    "max_clients": 100,
+    "max_message_size": 16384,
+    "keep_alive_interval": 60,
+    "socket_timeout": 30,
+    "select_timeout": 1
+  },
+  "broker": {
+    "max_inflight_messages": 50,
+    "max_queued_messages": 100,
+    "retain_available": true,
+    "wildcard_subscriptions": true,
+    "subscription_identifiers": true,
+    "shared_subscriptions": false,
+    "maximum_qos": 2,
+    "message_expiry_interval": 3600,
+    "session_expiry_interval": 7200,
+    "receive_maximum": 20,
+    "maximum_packet_size": 268435455,
+    "topic_alias_maximum": 0,
+    "persistence_enabled": false
+  },
+  "authentication": {
+    "allow_anonymous": true,
+    "require_username": false,
+    "password_file": "",
+    "acl_file": ""
+  },
+  "notification": {
+    "enabled": true,
+    "destination_client_id": "notification_client",
+    "topic": "broker/notifications",
+    "include_client_details": true,
+    "include_ssl_info": false,
+    "include_timestamp": true,
+    "max_subscribers": 100,
+    "notification_qos": 0,
+    "events": {
+      "client_connected": true,
+      "client_disconnected": true,
+      "topic_subscribed": false,
+      "topic_published": false,
+      "topic_unsubscribed": false,
+      "broker_started": false,
+      "broker_stopping": false
+    },
+    "rate_limit": {
+      "enabled": false,
+      "max_notifications_per_second": 100,
+      "burst_size": 200
+    }
+  },
+  "certificate_generation": {
+    "enabled": true
+  }
+}
+

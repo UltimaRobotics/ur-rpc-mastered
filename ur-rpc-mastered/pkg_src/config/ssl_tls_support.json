@@ -1,0 +1,48 @@
+
+{
+  "network": {
+    "bind_address": "0.0.0.0",
+    "port": 1856,
+    "ssl_port": 1855,
+    "max_clients": 100,
+    "max_message_size": 16384,
+    "keep_alive_interval": 60
+  },
+  "ssl": {
+    "enabled": true,
+    "ca_cert_file": "certs/broker/ca.crt",
+    "server_cert_file": "certs/broker/server.crt",
+    "server_key_file": "certs/broker/server.key",
+    "require_client_cert": true,
+    "verify_peer": true,
+    "tls_version": "1.2"
+  },
+  "broker": {
+    "max_inflight_messages": 50,
+    "max_queued_messages": 100,
+    "retain_available": true,
+    "wildcard_subscriptions": true,
+    "memory_limit_kb": 131072,
+    "max_publish_rate": 100,
+    "max_packet_size": 1048576,
+    "log_level": 2
+  },
+  "authentication": {
+    "allow_anonymous": false,
+    "require_certificate": true
+  },
+  "notifications": {
+    "enabled": true,
+    "topic": "broker/notifications",
+    "destination": "notification_client"
+  },
+  "certificate_generation": {
+    "enabled": true,
+    "ca_cert_file": "certs/broker/ca.crt",
+    "ca_key_file": "certs/broker/ca.key",
+    "output_directory": "certs/broker/generated",
+    "default_validity_days": 365,
+    "auto_approve": true
+  }
+}
+

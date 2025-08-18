@@ -1,0 +1,96 @@
+
+{
+  "network": {
+    "bind_address": "0.0.0.0",
+    "port": 1856,
+    "ssl_port": 1855,
+    "max_clients": 100,
+    "max_message_size": 16384,
+    "keep_alive_interval": 60
+  },
+  "ssl": {
+    "enabled": true,
+    "ca_cert_file": "certs/broker/ca.crt",
+    "server_cert_file": "certs/broker/server.crt",
+    "server_key_file": "certs/broker/server.key",
+    "require_client_cert": true,
+    "verify_peer": true,
+    "verify_client_cert": true,
+    "tls_version": "1.2",
+    "cipher_suites": [
+      "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384",
+      "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256"
+    ],
+    "protocol_versions": ["TLSv1.2", "TLSv1.3"],
+    "session_cache": false,
+    "reject_untrusted": true
+  },
+  "broker": {
+    "max_inflight_messages": 50,
+    "max_queued_messages": 100,
+    "retain_available": true,
+    "wildcard_subscriptions": true,
+    "memory_limit_kb": 131072,
+    "max_publish_rate": 100,
+    "max_packet_size": 1048576,
+    "log_level": 2,
+    "connection_timeout": 10,
+    "max_connection_attempts": 3
+  },
+  "authentication": {
+    "allow_anonymous": false,
+    "require_certificate": true,
+    "methods": ["certificate"],
+    "certificate": {
+      "ca_file": "certs/broker/ca.crt",
+      "require_cn_match": true,
+      "allowed_certificate_types": ["client_specific", "generic"],
+      "verify_certificate_chain": true,
+      "check_certificate_expiry": true,
+      "reject_self_signed": true
+    },
+    "strict_mode": true
+  },
+  "security": {
+    "block_non_ssl": true,
+    "force_ssl_only": true,
+    "reject_invalid_certificates": true,
+    "certificate_validation_strict": true,
+    "connection_rate_limit": {
+      "enabled": true,
+      "max_connections_per_ip": 5,
+      "time_window_seconds": 60
+    }
+  },
+  "notifications": {
+    "enabled": true,
+    "topic": "broker/notifications",
+    "destination": "notification_client",
+    "include_security_events": true,
+    "log_rejected_connections": true
+  },
+  "certificate_generation": {
+    "enabled": true,
+    "ca_cert_file": "certs/broker/ca.crt",
+    "ca_key_file": "certs/broker/ca.key",
+    "output_directory": "certs/broker/generated",
+    "default_validity_days": 365,
+    "auto_approve": false,
+    "require_approval": true,
+    "max_certificates_per_client": 3
+  },
+  "logging": {
+    "log_level": 2,
+    "log_security_events": true,
+    "log_certificate_validation": true,
+    "log_rejected_connections": true,
+    "categories": {
+      "network": 2,
+      "mqtt_protocol": 2,
+      "authentication": 1,
+      "certificates": 1,
+      "security": 1
+    }
+  }
+}
+
